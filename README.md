@@ -39,6 +39,11 @@ To run unit tests, execute: `ng test`
 
 To run end-to-end tests, use: `ng e2e`
 
+## Screenshots
+
+![App Screenshot](/Screenshots/HomePage.png)
+
+
 ## Contributing
 
 Contributions to Link Union are welcome! To contribute:
