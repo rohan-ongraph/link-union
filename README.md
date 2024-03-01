@@ -46,10 +46,6 @@ Contributions to Link Union are welcome! To contribute:
 4. Push to the branch (`git push origin feature/my-feature`).
 5. Create a new pull request.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Further Help
 
 For more information on using Angular CLI, refer to the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
