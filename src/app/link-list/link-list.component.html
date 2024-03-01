@@ -1,0 +1,443 @@
+<div class="flex flex-column justify-content-center align-items-center">
+  <!-- Main container for the entire application -->
+
+  <!-- Heading for the list -->
+  <h1>List</h1>
+
+  <!-- Container for displaying the list of bookmarks -->
+  <div class="list-container m-2">
+    <!-- Container for the list of bookmarks -->
+    <div class="flex flex-column gap-3 w-12">
+      <!-- Toolbar for managing bookmarks -->
+      <p-toolbar>
+        <!-- Toolbar content -->
+        <div
+          class="flex flex-column justify-content-center align-items-center gap-3 md:flex-row md:justify-content-between w-full"
+        >
+          <!-- Start of toolbar -->
+          <div class="flex gap-3 justify-content-between w-full toolbar">
+            <!-- Start of left toolbar group -->
+            <div class="p-toolbar-group-start flex-row">
+              <!-- Button for adding a bookmark -->
+              <button
+                pButton
+                icon="pi pi-plus"
+                class="mr-2"
+                (click)="addBookMark()"
+              ></button>
+              <!-- Button for printing bookmarks -->
+              <button
+                pButton
+                icon="pi pi-print"
+                class="mr-2"
+                [disabled]="data && data.length == 0"
+                (click)="generatePDF()"
+              ></button>
+              <!-- Confirmation dialog for deleting bookmarks -->
+              <p-confirmDialog></p-confirmDialog>
+              <!-- Button for deleting bookmarks -->
+              <button
+                pButton
+                icon="pi pi-trash"
+                (click)="confirm()"
+                [disabled]="data && data.length == 0"
+              ></button>
+            </div>
+            <!-- End of left toolbar group -->
+
+            <!-- Start of right toolbar group -->
+            <div class="p-toolbar-group-end">
+              <!-- Dropdown for sorting bookmarks -->
+              <p-dropdown
+                [options]="filterby"
+                [(ngModel)]="selectedFilter"
+                [showClear]="!(selectedFilter === '')"
+                placeholder="Sort"
+              ></p-dropdown>
+            </div>
+            <!-- End of right toolbar group -->
+          </div>
+          <!-- End of toolbar -->
+
+          <!-- Search input field -->
+          <div class="p-toolbar-group-center md:w-auto w-full">
+            <span class="p-input-icon-left w-full">
+              <i class="pi pi-search"></i>
+              <input
+                class="w-full"
+                pInputText
+                placeholder="Search"
+                [(ngModel)]="searchText"
+                (input)="filterData()"
+              />
+            </span>
+          </div>
+        </div>
+      </p-toolbar>
+      <!-- End of toolbar -->
+
+      <!-- Scroll to top button -->
+      <p-scrollTop></p-scrollTop>
+
+      <!-- Loop through bookmarks and display each one -->
+      @if(data && data.length>0){ @for(item of filteredData | sortBy:
+      selectedFilter ; track item.id){
+      <div class="col-12" #listContainer>
+        <p-card>
+          <div
+            class="flex flex-column justify-content-between align-items-center md:flex-row gap-5"
+          >
+            <!-- Bookmark details -->
+            <div
+              class="flex flex-column justify-content-center align-items-center md:justify-content-start md:align-items-start gap-4 text-justify"
+            >
+              <!-- Bookmark name -->
+              <h2 class="m-0 white-space-normal">{{ item.name }}</h2>
+              <!-- Bookmark description -->
+              <p class="m-0 white-space-normal">{{ item.desc }}</p>
+              <!-- Bookmark tags -->
+              <div class="flex gap-3 flex-column md:flex-row">
+                <span
+                  *ngFor="let it of item.tags"
+                  class="p-1 bg-yellow-100 border-round-lg"
+                >
+                  <i class="pi pi-tags mr-2"></i>
+                  <span class="font-semibold">{{ it }}</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Buttons for interacting with the bookmark -->
+            <div
+              class="flex gap-2 mt-3 justify-content-center align-items-center md:mt-0"
+            >
+              <!-- Button to view bookmark details -->
+              <p-button
+                (click)="viewDialog(item)"
+                icon="pi pi-eye"
+                [rounded]="true"
+                [outlined]="true"
+              ></p-button>
+              <!-- Button to edit bookmark -->
+              <p-button
+                (click)="onEdit(item)"
+                icon="pi pi-pencil"
+                class="md: align-items-center"
+                [rounded]="true"
+                severity="secondary"
+                [outlined]="true"
+              ></p-button>
+              <!-- Button to delete bookmark -->
+              <p-button
+                (click)="onDelete(item)"
+                icon="pi pi-times"
+                class="md: align-items-center"
+                [rounded]="true"
+                severity="danger"
+                [outlined]="true"
+              ></p-button>
+            </div>
+          </div>
+        </p-card>
+      </div>
+      }} @else {
+      <!-- Display message when there are no bookmarks -->
+      <div class="flex justify-content-center align-items-center">
+        <p class="font-semibold sm:font-bold text-lg sm:text-3xl">
+          There is nothing to show. Create Now !!!
+        </p>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+
+<!-- Conditionally render the dialog when 'visible' is true -->
+@if (visible) {
+<!-- Start of p-dialog component -->
+
+<p-dialog
+  header="Create a Bookmark"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '50rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [draggable]="false"
+  class="addMark"
+>
+  <!-- Container for form content -->
+  <div class="flex justify-content-center align-items-center signUp-container">
+    <!-- Card for displaying form elements -->
+    <div class="surface-card p-4 w-full lg:w-8">
+      <!-- Form for adding a new bookmark -->
+      <form [formGroup]="bookMarkForm" (ngSubmit)="onSubmit()">
+        <!-- Input field for entering the name of the bookmark -->
+        <label for="Name" class="block text-900 font-medium mb-2">Name</label>
+        <input
+          id="Name"
+          type="text"
+          placeholder="Name"
+          pInputText
+          class="w-full mb-1"
+          formControlName="name"
+        />
+        <!-- Validation messages for the name input field -->
+        @if(bookMarkForm.controls['name'].invalid &&
+        (bookMarkForm.controls['name'].touched ||
+        bookMarkForm.controls['name'].dirty)){
+        @if(bookMarkForm.controls['name'].errors?.['required']){
+        <small>
+          <div class="mb-3" style="color: red">*Name is required</div>
+        </small>
+        } @else if(bookMarkForm.controls['name'].errors?.['maxlength']){
+        <small>
+          <div class="mb-3" style="color: red">
+            *Name should be less than 50 characters
+          </div>
+        </small>
+        } @else if (bookMarkForm.get('name')?.hasError('pattern')) {
+        <small>
+          <div class="mb-3" style="color: red">
+            *Name should contain alphabetic characters only
+          </div>
+        </small>
+        } }
+
+        <!-- Input field for entering the link of the bookmark -->
+        <label for="link" class="block text-900 font-medium mb-2 mt-3"
+          >Link</label
+        >
+        <input
+          id="link"
+          type="text"
+          placeholder="Link"
+          pInputText
+          class="w-full mb-1"
+          formControlName="link"
+        />
+
+        <!-- Validation messages for the link input field -->
+        @if(bookMarkForm.controls['link'].invalid &&
+        (bookMarkForm.controls['link'].touched ||
+        bookMarkForm.controls['link'].dirty)){
+        @if(bookMarkForm.controls['link'].errors?.['required']){
+        <small>
+          <div class="mb-3" style="color: red">*Link is required</div>
+        </small>
+        } @else if (bookMarkForm.get('link')?.hasError('pattern') &&
+        (bookMarkForm.get('link')?.touched || bookMarkForm.get('link')?.dirty))
+        {
+        <div>
+          <small style="color: red">*Please enter a valid URL</small>
+        </div>
+        } }
+
+        <!-- Textarea for entering the description of the bookmark -->
+        <label for="desc" class="block text-900 font-medium mb-2 mt-3"
+          >Description</label
+        >
+        <textarea
+          rows="5"
+          cols="30"
+          pInputTextarea
+          formControlName="desc"
+          id="desc"
+          class="w-full mb-1"
+        ></textarea>
+
+        <!-- Input field for entering tags for the bookmark -->
+        <label for="tags" class="block text-900 font-medium mb-2 mt-3"
+          >Tags</label
+        >
+        <p-chips
+          formControlName="tags"
+          id="tags"
+          separator=","
+          [max]="5"
+          placeholder="Hint: java, toys, car (Maximum 5 tags)"
+          class="block w-full"
+        ></p-chips>
+
+        <!-- Buttons for submitting or canceling the form -->
+        <div class="flex justify-content-center align-items-end mt-3 gap-3">
+          <!-- Button to save the bookmark -->
+          <p-button
+            [disabled]="bookMarkForm.invalid"
+            icon="pi pi-check"
+            type="submit"
+            label="Save"
+            pAutoFocus
+            [autofocus]="true"
+            severity="primary"
+            [outlined]="true"
+          ></p-button>
+          <!-- Button to cancel adding a bookmark -->
+          <p-button
+            icon="pi pi-times"
+            (click)="visible = false"
+            label="Cancel"
+            pAutoFocus
+            [autofocus]="true"
+            severity="danger"
+            [outlined]="true"
+          ></p-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</p-dialog>
+
+}
+
+<!-- Conditionally render the dialog when 'view' is true -->
+@if (view) {
+<!-- Start of p-dialog component -->
+<p-dialog
+  header="{{ name }}"
+  [(visible)]="view"
+  [modal]="true"
+  [style]="{ width: '50rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [closeOnEscape]="true"
+  [dismissableMask]="true"
+>
+  <!-- Displaying the link of the bookmark -->
+  <p class="m-0">
+    <b>Link: </b>
+    <!-- Create a clickable link that opens in a new tab -->
+    <a href="{{ link }}" target="_blank" style="text-decoration: none">{{
+      link
+    }}</a>
+  </p>
+  <!-- Displaying the description of the bookmark -->
+  <p class="m-0 mt-3"><b>Description:</b> {{ desc }}</p>
+  <!-- Displaying the tags of the bookmark -->
+  <p class="m-0 mt-3"><b>Tags:</b> {{ tags }}</p>
+</p-dialog>
+} 
+
+<!-- Conditionally render the dialog when 'editView' is true -->
+@if (editView) {
+  <!-- Start of p-dialog component for editing bookmarks -->
+  <p-dialog
+  header="Edit the Bookmark"
+  [styleClass]="'custom-dialog'"
+  [(visible)]="editView"
+  [modal]="true"
+  [style]="{ width: '50rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [draggable]="false"
+  class="addMark"
+  [closable]="false"
+>
+      <!-- Form for editing bookmark details -->
+      <div class="flex justify-content-center align-items-center signUp-container">
+          <div class="surface-card p-4 w-full lg:w-8">
+              <form [formGroup]="bookMarkForm" (ngSubmit)="onEditChanges()">
+                  <!-- Input field for editing bookmark name -->
+                  <label for="Name" class="block text-900 font-medium mb-2">Name</label>
+                  <input
+                      id="Name"
+                      type="text"
+                      [(ngModel)]="editName" 
+                      pInputText
+                      class="w-full mb-1"
+                      formControlName="name"
+                  />
+                  <!-- Validation messages for the name input -->
+                  @if(bookMarkForm.controls['name'].invalid &&
+                  (bookMarkForm.controls['name'].touched ||
+                  bookMarkForm.controls['name'].dirty)){
+                  @if(bookMarkForm.controls['name'].errors?.['required']){
+                  <small>
+                      <div class="mb-3" style="color: red">*Name is required</div>
+                  </small>
+                  } @else if (bookMarkForm.get('name')?.hasError('pattern')) {
+                  <small>
+                      <div class="mb-3" style="color: red">
+                          *Name should contain alphabetic characters only
+                      </div>
+                  </small>
+                  } @else if(bookMarkForm.controls['name'].errors?.['maxlength']){
+                  <small>
+                      <div class="mb-3" style="color: red">
+                          *Name should be less than 50 characters
+                      </div>
+                  </small>
+                  } }
+
+                  <!-- Input field for editing bookmark link -->
+                  <label for="link" class="block text-900 font-medium mb-2 mt-3">Link</label>
+                  <input
+                      id="link"
+                      type="text"
+                      [(ngModel)]="editLink" 
+                      pInputText
+                      class="w-full mb-1"
+                      formControlName="link"
+                  />
+                  <!-- Validation messages for the link input -->
+                  @if(bookMarkForm.controls['link'].invalid &&
+                  (bookMarkForm.controls['link'].touched ||
+                  bookMarkForm.controls['link'].dirty)){
+                  @if(bookMarkForm.controls['link'].errors?.['required']){
+                  <small>
+                      <div class="mb-3" style="color: red">*Link is required</div>
+                  </small>
+                  } @else if (bookMarkForm.get('link')?.hasError('pattern') &&
+                  (bookMarkForm.get('link')?.touched || bookMarkForm.get('link')?.dirty))
+                  {
+                  <div>
+                      <small style="color: red">*Please enter a valid URL</small>
+                  </div>
+                  } }
+
+                  <!-- Input field for editing bookmark description -->
+                  <label for="desc" class="block text-900 font-medium mb-2 mt-3">Description</label>
+                  <textarea
+                      rows="5"
+                      cols="30"
+                      [(ngModel)]="editDesc" 
+                      pInputTextarea
+                      formControlName="desc"
+                      id="desc"
+                      class="w-full mb-1"
+                  ></textarea>
+
+                  <!-- Input field for editing bookmark tags -->
+                  <label for="tags" class="block text-900 font-medium mb-2 mt-3">Tags</label>
+                  <p-chips
+                      formControlName="tags"
+                      id="tags"
+                      [(ngModel)]="editTags" 
+                      separator=","
+                      placeholder="Hint: java, toys, car"
+                      class="block w-full"
+                  ></p-chips>
+
+                  <!-- Buttons for saving changes and canceling editing -->
+                  <div class="flex justify-content-center align-items-end mt-3 gap-3">
+                      <!-- Save button -->
+                      <p-button
+                          [disabled]="!bookMarkForm.dirty || bookMarkForm.invalid" 
+                          icon="pi pi-check"
+                          type="submit"
+                          label="Save"
+                          severity="primary"
+                          [outlined]="true"
+                      ></p-button>
+                      <!-- Cancel button -->
+                      <p-button
+                          icon="pi pi-times"
+                          (click)="onCancel()"
+                          label="Cancel"
+                          severity="danger"
+                          [outlined]="true"
+                      ></p-button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </p-dialog>
+}
+

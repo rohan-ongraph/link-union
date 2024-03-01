@@ -1,0 +1,9 @@
+/* Main profile container css */
+.main-profile-container{
+    height: 80vh;
+}
+
+/* profile image container css */
+.profile-image{
+    border-radius: 50%;
+}

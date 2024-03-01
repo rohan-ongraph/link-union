@@ -1,0 +1,50 @@
+<div class="flex justify-content-center align-items-center main-profile-container">
+  <!-- Profile Card -->
+  <div class="flex flex-column justify-content-center align-items-center shadow-2 p-5 border-round-lg">
+
+    <!-- Profile Image -->
+    <!-- Display userPic if available, otherwise display default profile image -->
+    <div class="profile-img">
+      <!-- Check if userPic is available -->
+      @if(userPic) {
+        <!-- Display userPic -->
+        <img [src]="userPic" alt="{{ username }}'s image" style="border-radius: 50%">
+      }
+      @else{
+        <!-- Display default profile image -->
+        <img src="../../assets/profile-image.png" alt="{{ username }}'s image" style="border-radius: 50%">
+      }
+    </div>
+
+    <!-- User Information -->
+    <div class="flex flex-column">
+      <!-- Display Full Name -->
+      <p><strong>Full Name: </strong>{{ username }}</p>
+      <!-- Display Email -->
+      <p><strong>Email: </strong>{{ email }}</p>
+    </div>
+
+    <!-- Buttons -->
+    <!-- Sign Out and Delete User Buttons -->
+    <div class="flex justify-content-center align-items-end mt-3 gap-3">
+      <!-- Sign Out Button -->
+      <p-button 
+        type="submit" 
+        (onClick)="logout()" 
+        label="Sign Out" 
+        severity="primary" 
+        [outlined]="true" 
+        [size]="'small'"
+      ></p-button>
+
+      <!-- Delete User Button -->
+      <p-button 
+        label="Delete User" 
+        (onClick)="deleteUser()" 
+        severity="danger" 
+        [outlined]="true" 
+        [size]="'small'"
+      ></p-button>
+    </div>
+  </div>
+</div>

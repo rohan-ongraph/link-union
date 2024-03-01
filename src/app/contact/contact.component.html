@@ -1,0 +1,64 @@
+<div class="flex justify-content-center align-items-center contact-form">
+  <!-- Container for the contact form -->
+  <div class="surface-card p-4 w-full lg:w-8 flex flex-column justify-content-center align-items-center">
+      <!-- Form for submitting contact information -->
+      <form [formGroup]="contactForm" class="shadow-2 p-4 border-round-lg sm:shadow-0" (ngSubmit)="sendIssue()">
+          <!-- Title for the contact form -->
+          <h2 style="text-align: center;" class="mb-5">Contact Form</h2>
+          <!-- Subject input field -->
+          <label for="subject" class="block text-900 font-medium mb-2">Subject</label>
+          <input
+              id="subject"
+              type="text"
+              pInputText
+              class="w-full mb-1"
+              formControlName="subject"
+          />
+  
+          <!-- Message input field -->
+          <label for="message" class="block text-900 font-medium mb-2 mt-3">Message</label>
+          <textarea
+              rows="6"
+              cols="40"
+              pInputTextarea
+              formControlName="message"
+              id="message"
+              class="w-full mb-1"
+          ></textarea>
+
+          <!-- Submit button -->
+          <div class="flex justify-content-center align-items-end mt-3 gap-3">
+              <p-button
+                  type="submit"
+                  label="Submit"
+                  severity="primary"
+                  [outlined]="false"
+              ></p-button>
+          </div>
+
+          <!-- Separator line and text -->
+          <div style="text-align: center;" class="mt-4">
+              <hr style="color: rgba(128, 128, 128, 1.0);">
+              <span style="background-color: white; padding: 0 10px; position: relative; top: -20px;">or</span>
+          </div>
+        
+          <!-- Social media icons -->
+          <div class="flex justify-content-center gap-4">
+              <!-- LinkedIn -->
+              <a href="https://www.linkedin.com/in/rohan-kandpal-0a3a44214/"  target="_blank" style="text-decoration: none;">
+                  <i class="pi pi-linkedin" style="font-size: 1.5rem; color: blue;"></i>
+              </a>
+
+              <!-- Email -->
+              <a href="mailto:rohan.ongraph@gmail.com" style="text-decoration: none;">
+                  <i class="fa-solid fa-envelope" style="font-size: 1.6rem; color: black;"></i>
+              </a>
+              
+              <!-- WhatsApp -->
+              <a target="_blank" style="text-decoration: none;">
+                  <i class="pi pi-whatsapp" style="font-size: 1.5rem; color: green;" ></i>
+              </a>
+          </div>
+      </form>
+  </div>
+</div>

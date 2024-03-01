@@ -1,0 +1,30 @@
+/* Import PrimeNG theme and styles */
+@import 'primeflex/primeflex.css';
+@import "primeicons/primeicons.css";
+
+/* Define custom styles */
+/* Adjust sidebar width */
+.sidebar {
+    width: 65%;
+}
+
+/* Customize menu styles */
+.p-menu {
+    border: none;
+}
+
+/* Customize sidebar footer */
+.p-sidebar-footer {
+    text-align: center;
+}
+
+/* Hide order list controls */
+.p-orderlist-controls {
+    display: none;
+}
+
+/* Reset default body styles */
+body {
+    margin: 0;
+    padding: 0;
+}

@@ -1,0 +1,8 @@
+/* css for list view */
+app-link-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+}

@@ -1,0 +1,28 @@
+<div class="grid grid-nogutter surface-section text-800 main-home-desc-container">
+    <!-- Left column containing text content -->
+    <div class="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center">
+        <section>
+            <!-- Main headline -->
+            <span class="block text-6xl font-bold mb-1">Save the Links</span>
+            <!-- Subheadline -->
+            <div class="text-6xl text-primary font-bold mb-3">which are important to you</div>
+            <!-- Description -->
+            <p class="mt-0 mb-4 text-700 line-height-3 text-justify">Link Web helps you keep all your favorite links organized in one place. Save URLs, categorize them with tags, and access them easily from any device. Say goodbye to messy bookmarks and hello to a more organized online experience!</p>
+            
+            <!-- Conditionally render buttons based on user authentication -->
+            @if(!isUser){
+                <!-- Sign-in and Sign-up buttons -->
+                <button pButton pRipple label="Sign In" type="button" class="mr-3 p-button-raised" routerLink="signIn"></button>
+                <button pButton pRipple label="Sign Up" type="button" class="p-button-outlined" routerLink="signUp"></button>
+            }
+            @else{
+                <!-- Link to the bookmark list -->
+                <strong><a routerLink="/list" style="text-decoration: none;">Save a Link <i class="pi pi-arrow-right"></i></a></strong>
+            }
+        </section>
+    </div>
+    <!-- Right column containing image -->
+    <div class="col-12 md:col-6 overflow-hidden sm:display:none" style="height: 100vh;">
+        <img src="../../assets/Free Vector _ Gradient landscape design background.jpg" alt="Image" class="md:ml-auto block md:h-full" style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)">
+    </div>
+</div>

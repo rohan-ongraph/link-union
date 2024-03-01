@@ -1,0 +1,94 @@
+Styles for the container holding the list
+.list-container {
+  display: flex; /* Display as flex container */
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center items vertically */
+  align-items: center; /* Center items horizontally */
+  width: 80vw; /* Set width to 80% of viewport width */
+}
+
+/* Styles for the addMark class */
+.addMark {
+  height: auto; /* Automatically adjust height */
+}
+
+/* Styles for truncating text */
+.truncate-text {
+  overflow: hidden; /* Hide overflowing content */
+  white-space: nowrap; /* Prevent wrapping */
+  text-overflow: ellipsis; /* Show ellipsis (...) for overflowed text */
+  max-width: 200px; /* Limit width to 200px */
+}
+
+/* Media query for small screens */
+@media only screen and (max-width: 420px) {
+  /* Styles for toolbar on small screens */
+  .toolbar {
+    display: flex; /* Display as flex container */
+    flex-direction: column; /* Stack items vertically */
+  }
+
+  /* Adjust width for dropdown and input elements */
+  .p-dropdown,
+  .p-component,
+  .p-inputwrapper,
+  .p-inputwrapper-filled {
+    width: 100% !important; /* Set width to 100% */
+  }
+
+  p-dropdown {
+    width: 100%; /* Set width to 100% */
+  }
+}
+
+/* Styles for alert messages */
+.mssg-alert {
+  width: 20%; /* Set width to 20% */
+}
+
+/* Styles for h2 heading */
+h2 {
+  word-break: break-all; /* Break words when needed */
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+}
+
+.addMark{
+  height: auto;
+}
+
+.truncate-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 200px; 
+}
+
+@media only screen and (max-width: 420px) {
+  .toolbar{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .p-dropdown, .p-component, .p-inputwrapper, .p-inputwrapper-filled{
+    width: 100% !important;
+  }
+
+  p-dropdown{
+    width: 100%;
+  }
+}
+
+.mssg-alert{
+  width: 20%;
+}
+
+h2{
+  word-break: break-all;
+}

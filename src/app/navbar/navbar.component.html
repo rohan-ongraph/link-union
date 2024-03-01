@@ -1,0 +1,42 @@
+<!-- Conditional rendering based on the 'isUser' flag -->
+@if(isUser) {
+  <!-- Mega menu component with dynamic model binding -->
+  <p-megaMenu [model]="items" styleClass="flex">
+    <!-- Template for the start of the mega menu -->
+    <ng-template pTemplate="start">
+      <!-- Image displayed at the start of the mega menu -->
+      <img src="../assets/icons8-link-64.png" height="40" class="mr-2" />
+    </ng-template>
+
+    <!-- Conditional rendering based on both 'isScreenLargeEnough' and 'isUser' flags -->
+    @if (isScreenLargeEnough && isUser) {
+      <!-- Container for user-related actions -->
+      <div class="flex gap-3">
+        <!-- Button for user profile, with tooltip and router link -->
+        <p-button
+          icon="pi pi-user"
+          pTooltip="{{ userName }}"
+          tooltipPosition="bottom"
+          pAutoFocus
+          severity="primary"
+          [outlined]="true"
+          routerLink="/profile"
+          class="mr-3"
+        ></p-button>
+      </div>
+    }
+
+    <!-- Conditional rendering based on 'isScreenLargeEnough' flag -->
+    @if(!isScreenLargeEnough) {
+      <!-- Sidebar component for smaller screens -->
+      <p-sidebar [(visible)]="sidebarVisible" [styleClass]="'sidebar'">
+        <!-- Menu component for sidebar items -->
+        <p-menu [model]="items1"></p-menu>
+        <!-- Template for footer of the sidebar -->
+        <ng-template pTemplate="footer">Made with &#10084;</ng-template>
+      </p-sidebar>
+      <!-- Button to toggle visibility of the sidebar -->
+      <p-button (click)="sidebarVisible = true" icon="pi pi-bars"></p-button>
+    }
+  </p-megaMenu>
+}

@@ -1,0 +1,14 @@
+/* Styles for the container of the about section */
+.about-container{
+    height: 90vh; /* Set height to 90% of the viewport height */
+    background-image: url(../../assets/about-page.jpg); /* Set background image */
+    background-repeat: no-repeat; /* Prevent background image from repeating */
+    background-position: center; /* Center the background image */
+    background-size: cover; /* Cover the entire container with the background image */
+}
+
+/* Styles for the container of the paragraph within the about section */
+.about-para-container{
+    background-color: aliceblue; /* Set background color */
+    opacity: .8; /* Set opacity to 80% */
+}

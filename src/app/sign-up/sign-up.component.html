@@ -1,0 +1,52 @@
+<div class="flex justify-content-center align-items-center signUp-container">
+  <div class="surface-card p-4 sm:shadow-2 border-round w-auto sm:w-7 md:w-6 xl:w-4">
+    <div class="text-center mb-5">
+      <!-- Title and sign-in link -->
+      <div class="text-900 text-3xl font-medium mb-3">Welcome</div>
+      <span class="text-600 font-medium line-height-3">Already have an account?</span>
+      <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer" routerLink="/signIn">Sign in</a>
+    </div>
+
+    <!-- Sign-up form -->
+    <form [formGroup]="registerForm" (ngSubmit)="submitForm()" class="flex flex-column justify-content-center">
+      <!-- Full name input -->
+      <label for="fullname1" class="block text-900 font-medium mb-2">Full Name</label>
+      <input id="fullname1" type="text" placeholder="Full Name" pInputText class="w-full mb-1" formControlName="fullname" />
+      <!-- Validation errors for full name -->
+      <!-- Error: required -->
+      <!-- Error: pattern -->
+
+      <!-- Email input -->
+      <label for="email1" class="block text-900 font-medium mb-2 mt-3">Email</label>
+      <input id="email1" type="text" placeholder="Email address" pInputText class="w-full mb-1" formControlName="email" />
+      <!-- Validation errors for email -->
+      <!-- Error: required -->
+      <!-- Error: email -->
+
+      <!-- Password input -->
+      <label for="password1" class="block text-900 font-medium mb-2 mt-3">Password</label>
+      <input id="password1" type="password" placeholder="Password" pInputText class="w-full mb-1" formControlName="password" />
+      <!-- Validation errors for password -->
+      <!-- Error: required -->
+
+      <!-- Confirm password input -->
+      <label for="confirmPass" class="block text-900 font-medium mb-2 mt-3">Confirm Password</label>
+      <input id="confirmPass" type="password" placeholder="Confirm Password" pInputText class="w-full mb-1" formControlName="confirmPassword" />
+      <!-- Validation errors for confirm password -->
+      <!-- Error: required -->
+      <!-- Error: mismatch -->
+
+      <!-- Sign-up button -->
+      <button type="submit" pButton pRipple label="Sign Up" class="w-full mt-3" [disabled]="registerForm.invalid"></button>
+
+      <!-- Divider and alternative sign-up method -->
+      <div style="text-align: center;" class="mt-4">
+        <hr style="color: rgba(128, 128, 128, 1.0);">
+        <span style="background-color: white; padding: 0 10px; position: relative; top: -20px;">or</span>
+      </div>
+      
+      <!-- Google Sign-Up button -->
+      <div id="google-btn" class="flex justify-content-center"></div>
+    </form>
+  </div>
+</div>
