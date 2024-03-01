@@ -42,7 +42,7 @@ To run end-to-end tests, use: `ng e2e`
 ## Screenshots
 
 Home page
-![App Screenshot](/Screenshots/Home-page.png)
+![App Screenshot](/Screenshots/Home-Page.png)
 
 Sign In page
 ![App Screenshot](/Screenshots/Sign-In.png)
