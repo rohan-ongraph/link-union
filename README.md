@@ -41,7 +41,38 @@ To run end-to-end tests, use: `ng e2e`
 
 ## Screenshots
 
-![App Screenshot](/Screenshots/Home page.png)
+Home page
+![App Screenshot](/Screenshots/Home-page.png)
+
+Sign In page
+![App Screenshot](/Screenshots/Sign-In.png)
+
+Sign Up page
+![App Screenshot](/Screenshots/Sign-Up.png)
+
+List View
+![App Screenshot](/Screenshots/List-View.png)
+
+Creat Bookmark option
+![App Screenshot](/Screenshots/Create-Bookmark.png)
+
+Edit Bookmark option
+![App Screenshot](/Screenshots/Edit-Bookmark.png)
+
+View Bookmark option
+![App Screenshot](/Screenshots/View-Bookmark.png)
+
+Delete all data option
+![App Screenshot](/Screenshots/Delete-all.png)
+
+Profile page
+![App Screenshot](/Screenshots/Profile.png)
+
+Contact Us page
+![App Screenshot](/Screenshots/Contact-Form.png)
+
+About Section page
+![App Screenshot](/Screenshots/About-section.png)
 
 
 ## Contributing
