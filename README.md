@@ -28,13 +28,13 @@ Navigate to `http://localhost:4200/` in your web browser to access the applicati
 
 ## Development
 
-Link Union is built with Angular. To generate a new component, use the following command: ng generate component component-name
-To build the project, run: ng build
+Link Union is built with Angular. To generate a new component, use the following command: `ng generate component component-name`
+To build the project, run: `ng build`
 
 ## Testing
 
-To run unit tests, execute: ng test
-To run end-to-end tests, use: ng e2e
+To run unit tests, execute: `ng test`
+To run end-to-end tests, use: `ng e2e`
 
 ## Contributing
 
