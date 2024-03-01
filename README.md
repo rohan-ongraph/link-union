@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # DemoProject
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.10.
@@ -25,3 +26,6 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+=======
+# link-union
+>>>>>>> 11a501fdc9d2f720988098f6c0d48501aaf469d3
