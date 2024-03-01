@@ -41,7 +41,7 @@ To run end-to-end tests, use: `ng e2e`
 
 ## Screenshots
 
-![App Screenshot](/Screenshots/Profile.png)
+![App Screenshot](/Screenshots/Home page.png)
 
 
 ## Contributing
