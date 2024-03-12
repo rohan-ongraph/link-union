@@ -65,9 +65,12 @@ To install JSON Server globally, run the following command:
 
 ### Usage
 
-Once JSON Server is running, you can interact with your mock API using standard HTTP requests. For example:
+Once JSON Server is running, you can interact with your mock API using standard HTTP requests.
+
+For example:
 
 To fetch all links: GET `http://localhost:3000/links`
+
 To fetch a specific link: `GET http://localhost:3000/links/{id}`
 
 ## Testing
