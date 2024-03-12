@@ -33,6 +33,43 @@ Link Union is built with Angular. To generate a new component, use the following
 
 To build the project, run: `ng build`
 
+## Local Database
+
+Link Union uses a local JSON file to store link data. Follow these steps to set up and use the local database:
+
+1. **JSON File**: I have created a JSON file named `db.json` in the root directory of the project. You can prepopulate it with some sample data.
+
+2. **Service Setup**: The `userService` provided in the application handles CRUD operations for managing link data in the JSON file. The service uses the Angular `HttpClient` module to interact with the JSON file.
+
+3. **Data Structure**: The link data stored in the JSON file follows a specific structure. Each link object should have properties for `name`, `description`, `tags`, etc. Ensure that the data structure matches the model used by the application.
+
+4. **CRUD Operations**: The `userService` provides methods for performing CRUD operations on the link data. These methods include fetching all links, adding a new link, updating an existing link, and deleting a link.
+
+5. **Integration with Components**: Components within the application use the `userService` to interact with the local database. For example, the list view component fetches links from the service and displays them in the UI.
+
+By following these steps, you can effectively manage link data using a local JSON file within the Link Union application.
+
+## JSON Mock Server
+
+To simulate a backend API for your local database during development, you can use JSON Server. JSON Server allows you to quickly create a RESTful API from a JSON file, making it ideal for prototyping and testing frontend applications.
+
+### Installation
+
+To install JSON Server globally, run the following command:
+
+`npm install -g json-server`
+
+### Starting JSON Server
+
+`json-server --watch db.json --port 3000`
+
+### Usage
+
+Once JSON Server is running, you can interact with your mock API using standard HTTP requests. For example:
+
+To fetch all links: GET `http://localhost:3000/links`
+To fetch a specific link: `GET http://localhost:3000/links/{id}`
+
 ## Testing
 
 To run unit tests, execute: `ng test`
