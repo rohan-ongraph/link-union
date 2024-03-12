@@ -2,6 +2,28 @@
 
 Link Union is a web application designed for managing links from various sources. It allows users to save links along with a name, description, and tags. The application supports CRUD operations, user authentication (login and logout), user profiles, and contact forms. Additionally, it includes an about section, a list view for managing links, and the ability to print link lists as PDF files.
 
+# Table of Contents
+
+1. [Link Union](#link-union)
+    - [Features](#features)
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [Development](#development)
+2. [Local Database](#local-database)
+    - [JSON File](#json-file)
+    - [Service Setup](#service-setup)
+    - [Data Structure](#data-structure)
+    - [CRUD Operations](#crud-operations)
+    - [Integration with Components](#integration-with-components)
+3. [JSON Mock Server](#json-mock-server)
+    - [Installation](#installation-1)
+    - [Starting JSON Server](#starting-json-server)
+    - [Usage](#usage-1)
+4. [Testing](#testing)
+5. [Screenshots](#screenshots)
+6. [Contributing](#contributing)
+7. [Further Help](#further-help)
+
 ## Features
 
 - Save links with name, description, and tags
